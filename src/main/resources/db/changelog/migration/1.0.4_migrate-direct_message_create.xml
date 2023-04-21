@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="1" author="FilipTryhuk-pkmail">
+        <createTable tableName="direct_message">
+            <column name="id" type="integer">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_id" type="integer">
+                <constraints foreignKeyName="FK_usersDetails_directMessage" references="users_details(id)"/>
+            </column>
+            <column name="email" type="VARCHAR(60)"/>
+            <column name="phone_number" type="VARCHAR(15)"/>
+            <column name="message" type="VARCHAR(2000)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
