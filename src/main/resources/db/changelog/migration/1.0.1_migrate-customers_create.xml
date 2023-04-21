@@ -4,8 +4,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
     <changeSet id="1" author="FilipTryhuk-pkmail">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customers"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="customers">
-            <column name="id" type="integer,">
+            <column name="id" type="integer">
                 <constraints primaryKey="true"/>
             </column>
             <column name="email" type="VARCHAR(255)"/>

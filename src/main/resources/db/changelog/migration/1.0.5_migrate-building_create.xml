@@ -3,7 +3,13 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
-    <changeSet id="1" author="FilipTryhuk-pkmail">
+    <changeSet id="5" author="FilipTryhuk-pkmail">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="building"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="building">
             <column name="building_id" type="integer">
                 <constraints primaryKey="true" foreignKeyName="FK_offers_building" references="offers(building_details)"/>

@@ -3,7 +3,13 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
-    <changeSet id="1" author="FilipTryhuk-pkmail">
+    <changeSet id="3" author="FilipTryhuk-pkmail">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="offers"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="offers">
             <column name="id" type="integer">
                 <constraints primaryKey="true"/>
@@ -20,7 +26,7 @@
             <column name="available_until" type="Date"/>
             <column name="district" type="VARCHAR(30)"/>
             <column name="owner" type="integer">
-                <constraints foreignKeyName="FK_usersDetails_offers" references="users_details(customer_number)"/>
+
             </column>
             <column name="building_details" type="integer"/>
         </createTable>
