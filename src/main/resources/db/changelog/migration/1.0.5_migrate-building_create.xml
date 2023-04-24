@@ -11,7 +11,7 @@
         </preConditions>
 
         <createTable tableName="building">
-            <column name="building_id" type="integer">
+            <column name="building_id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true" foreignKeyName="FK_offers_building" references="offers(building_details)"/>
             </column>
             <column name="building_type" type="VARCHAR(30)"/>

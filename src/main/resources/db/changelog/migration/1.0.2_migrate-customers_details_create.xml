@@ -11,7 +11,7 @@
         </preConditions>
 
         <createTable tableName="customers_details">
-            <column name="id" type="integer">
+            <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(50)"/>
@@ -21,7 +21,9 @@
             <column name="street_address" type="VARCHAR(100)"/>
             <column name="postal_code" type="VARCHAR(10)"/>
             <column name="is_admin" type="boolean"/>
-            <column name="customer_number" type="integer"/>
+            <column name="customer_number" type="integer" autoIncrement="true">
+                <constraints unique="true"/>
+            </column>
         </createTable>
     </changeSet>
 

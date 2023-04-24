@@ -11,7 +11,7 @@
         </preConditions>
 
         <createTable tableName="offers">
-            <column name="id" type="integer">
+            <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="city" type="VARCHAR(50)"/>
@@ -26,9 +26,11 @@
             <column name="available_until" type="Date"/>
             <column name="district" type="VARCHAR(30)"/>
             <column name="owner" type="integer">
-
+                <constraints foreignKeyName="FK_customersDetails_offers" references="customers_details(customer_number)"/>
             </column>
-            <column name="building_details" type="integer"/>
+            <column name="building_details" type="integer">
+                <constraints unique="true"/>
+            </column>
         </createTable>
     </changeSet>
 

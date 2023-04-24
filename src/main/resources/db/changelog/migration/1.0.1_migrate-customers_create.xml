@@ -10,8 +10,8 @@
             </not>
         </preConditions>
 
-        <createTable tableName="customers">
-            <column name="id" type="integer">
+        <createTable tableName="customers" >
+            <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="email" type="VARCHAR(255)"/>
