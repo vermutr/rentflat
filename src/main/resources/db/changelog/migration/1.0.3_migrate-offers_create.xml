@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="3" author="FilipTryhuk-pkmail">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="offers"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="offers">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(50)"/>
+            <column name="street_address" type="VARCHAR(100)"/>
+            <column name="postal_code" type="VARCHAR(10)"/>
+            <column name="price" type="float"/>
+            <column name="area" type="integer"/>
+            <column name="room_count" type="integer"/>
+            <column name="market_type" type="VARCHAR(20)"/>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="available_from" type="Date"/>
+            <column name="available_until" type="Date"/>
+            <column name="district" type="VARCHAR(30)"/>
+            <column name="owner" type="integer">
+                <constraints foreignKeyName="FK_customersDetails_offers" references="customers_details(customer_number)" nullable="false"/>
+            </column>
+            <column name="building_details" type="integer">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
