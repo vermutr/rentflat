@@ -12,7 +12,7 @@
 
         <createTable tableName="building">
             <column name="building_id" type="integer" autoIncrement="true">
-                <constraints primaryKey="true" foreignKeyName="FK_offers_building" references="offers(building_details)"/>
+                <constraints primaryKey="true" foreignKeyName="FK_offers_building" references="offers(building_details)" unique="true" nullable="false"/>
             </column>
             <column name="building_type" type="VARCHAR(30)"/>
             <column name="floor_count" type="integer"/>

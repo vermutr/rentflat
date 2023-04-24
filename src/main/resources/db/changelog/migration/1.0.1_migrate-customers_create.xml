@@ -10,12 +10,16 @@
             </not>
         </preConditions>
 
-        <createTable tableName="customers" >
+        <createTable tableName="customers">
             <column name="id" type="integer" autoIncrement="true">
-                <constraints primaryKey="true"/>
+                <constraints primaryKey="true" unique="true" nullable="false"/>
             </column>
-            <column name="email" type="VARCHAR(255)"/>
-            <column name="password" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="customer_number" type="integer"/>
         </createTable>
     </changeSet>
