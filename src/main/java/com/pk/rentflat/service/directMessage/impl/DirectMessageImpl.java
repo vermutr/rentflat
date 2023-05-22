@@ -16,6 +16,25 @@ public class DirectMessageImpl implements DirectMessageService {
 
     @Override
     public DirectMessage getDirectMessageByEmail(String email) {
-        return directMessageRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("No messages found!"));
+        return directMessageRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Message not found!"));
+    }
+
+    @Override
+    public List<DirectMessage> getAllDirectMessages() {
+        return directMessageRepository.findAll();
+    }
+
+    @Override
+    public DirectMessage saveDirectMessage(DirectMessage directMessage) {
+        return directMessageRepository.save(directMessage);
+    }
+
+    @Override
+    public void deleteDirectMessageById(Integer id) {
+        directMessageRepository.deleteById(id);
+    }
+    @Override
+    public DirectMessage updateDirectMessageById(DirectMessage directMessage, Integer id) {
+        return directMessageRepository.save(directMessage);
     }
 }
