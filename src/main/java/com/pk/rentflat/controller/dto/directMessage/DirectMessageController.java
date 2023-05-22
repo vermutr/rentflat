@@ -4,6 +4,7 @@ package com.pk.rentflat.controller.dto.directMessage;
 import com.pk.rentflat.converter.directMessage.DirectMessageConverter;
 import com.pk.rentflat.model.DirectMessage;
 import com.pk.rentflat.service.directMessage.DirectMessageService;
+import jakarta.persistence.GeneratedValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class DirectMessageController {
 
     private final DirectMessageService directMessageService;
 
-    @GetMapping
-    public DirectMessageResponse getDirectMessagesByEmail(String email) {
+    @GetMapping(value = "/{email}")
+    public DirectMessageResponse getDirectMessagesByEmail(@PathVariable String email) {
         return DirectMessageConverter.convertDirectMessageToDirectMessageResponse(directMessageService.getDirectMessageByEmail(email));
     }
 
