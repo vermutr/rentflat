@@ -1,5 +1,6 @@
 package com.pk.rentflat.service.offers.impl;
 
+import com.pk.rentflat.config.security.util.SecurityUtil;
 import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.repository.OffersRepository;
 import com.pk.rentflat.service.offers.OffersService;
@@ -22,6 +23,11 @@ public class OffersServiceImpl implements OffersService {
     @Override
     public Offers getOfferById(Integer id) {
         return offersRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<Offers> getAllOffersByCustomerId() {
+        return offersRepository.findAllByCustomerDetailsId(SecurityUtil.getCustomerId());
     }
 
 }

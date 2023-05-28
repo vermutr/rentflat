@@ -43,4 +43,9 @@ public class OffersController {
         );
     }
 
+    @GetMapping("/customer")
+    public List<OffersResponse> getOfferByCustomerId() {
+        return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
+    }
+
 }

@@ -10,4 +10,6 @@ public interface OffersService {
 
     Offers getOfferById(Integer id);
 
+    List<Offers> getAllOffersByCustomerId();
+
 }
