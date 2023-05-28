@@ -12,7 +12,6 @@
     <include file="db/changelog/migration/1.0.1_migrate-customers_create.xml"/>
     <include file="db/changelog/migration/1.0.2_migrate-customers_details_create.xml"/>
     <include file="db/changelog/migration/1.0.3_migrate-offers_create.xml"/>
-    <include file="db/changelog/migration/1.0.4_migrate-direct_message_create.xml"/>
     <include file="db/changelog/migration/1.0.5_migrate-building_create.xml"/>
     <include file="db/changelog/migration/1.0.6_migrate-reviews_create.xml"/>
 

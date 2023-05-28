@@ -19,4 +19,9 @@ public class OffersServiceImpl implements OffersService {
         return offersRepository.findAll();
     }
 
+    @Override
+    public Offers getOfferById(Integer id) {
+        return offersRepository.getReferenceById(id);
+    }
+
 }

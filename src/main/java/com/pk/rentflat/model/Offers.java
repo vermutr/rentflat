@@ -1,6 +1,9 @@
 package com.pk.rentflat.model;
+
+import com.pk.rentflat.converter.attributeconverter.ListToStringConverter;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,12 +13,19 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Builder
 @NoArgsConstructor
@@ -55,6 +65,13 @@ public class Offers {
     @Column(name = "district")
     private String district;
 
+    @Column(name = "main_picture")
+    private String mainPicture;
+
+    @Convert(converter = ListToStringConverter.class)
+    @Column(name = "all_pictures")
+    private List<String> allPictures;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private CustomerDetails customerDetails;
@@ -67,6 +84,19 @@ public class Offers {
 
     @Column(name = "available_until")
     private LocalDateTime availableUntil;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Offers offers = (Offers) o;
+        return id != null && Objects.equals(id, offers.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 }
 

@@ -21,6 +21,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="customer_number" type="integer"/>
+            <column name="role" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
 

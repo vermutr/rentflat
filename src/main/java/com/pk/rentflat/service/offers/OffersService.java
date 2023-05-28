@@ -8,4 +8,6 @@ public interface OffersService {
 
     List<Offers> getAllOffers();
 
+    Offers getOfferById(Integer id);
+
 }

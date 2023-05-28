@@ -18,7 +18,7 @@ public class CustomerDetailsConverter {
         customerDetailsResponse.setSurname(customerDetails.getSurname());
         customerDetailsResponse.setPhoneNumber(customerDetails.getPhoneNumber());
         customerDetailsResponse.setCity(customerDetails.getCity());
-        customerDetailsResponse.setStreetAddress(customerDetailsResponse.getStreetAddress());
+        customerDetailsResponse.setStreetAddress(customerDetails.getStreetAddress());
         customerDetailsResponse.setPostalCode(customerDetails.getPostalCode());
         customerDetailsResponse.setIsAdmin(customerDetails.getIsAdmin());
         customerDetailsResponse.setCustomerNumber(customerDetails.getCustomerNumber());
