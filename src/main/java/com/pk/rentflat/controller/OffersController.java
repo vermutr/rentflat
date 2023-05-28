@@ -1,4 +1,4 @@
-package com.pk.rentflat.controller.dto.offers;
+package com.pk.rentflat.controller;
 
 import com.pk.rentflat.controller.dto.offers.OffersResponse;
 import com.pk.rentflat.converter.offers.OffersConverter;
