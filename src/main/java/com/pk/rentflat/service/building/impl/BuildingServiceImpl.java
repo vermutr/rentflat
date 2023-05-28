@@ -16,4 +16,9 @@ public class BuildingServiceImpl implements BuildingService {
     public Building getBuilding(Integer id) {
         return buildingRepository.getReferenceById(id);
     }
+
+    @Override
+    public Building saveBuilding(Building building) {
+        return buildingRepository.save(building);
+    }
 }

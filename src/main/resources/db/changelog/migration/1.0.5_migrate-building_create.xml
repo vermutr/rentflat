@@ -15,6 +15,7 @@
                 <constraints primaryKey="true" unique="true" nullable="false"/>
             </column>
             <column name="building_type" type="VARCHAR(30)"/>
+            <column name="name" type="VARCHAR(30)"/>
             <column name="floor_count" type="integer"/>
             <column name="construction_date" type="Date"/>
         </createTable>

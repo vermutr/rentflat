@@ -6,4 +6,6 @@ public interface BuildingService {
 
     Building getBuilding(Integer id);
 
+    Building saveBuilding(Building building);
+
 }
