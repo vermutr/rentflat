@@ -64,7 +64,7 @@ public class OffersSpecification implements Specification<Offers> {
         } else if (Objects.nonNull(offersFilter.getPriceFrom())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), offersFilter.getPriceFrom()));
         } else if (Objects.nonNull(offersFilter.getPriceTo())) {
-            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), offersFilter.getPriceTo()));
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), offersFilter.getPriceTo()));
         }
 
         if (Objects.nonNull(offersFilter.getRoomCountFrom()) && Objects.nonNull(offersFilter.getRoomCountTo())) {
@@ -72,7 +72,7 @@ public class OffersSpecification implements Specification<Offers> {
         } else if (Objects.nonNull(offersFilter.getRoomCountFrom())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("roomCount"), offersFilter.getRoomCountFrom()));
         } else if (Objects.nonNull(offersFilter.getRoomCountTo())) {
-            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("roomCount"), offersFilter.getRoomCountTo()));
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("roomCount"), offersFilter.getRoomCountTo()));
         }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
