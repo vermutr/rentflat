@@ -6,12 +6,13 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ListToStringConverter implements AttributeConverter<List<byte[]>, String> {
 
     @Override
     public String convertToDatabaseColumn(List<byte[]> attribute) {
-        if (!attribute.isEmpty()) {
+        if (Objects.nonNull(attribute)) {
             List<String> attributes = attribute
                     .stream()
                     .map(s -> Base64.getEncoder().encodeToString(s))
@@ -24,7 +25,7 @@ public class ListToStringConverter implements AttributeConverter<List<byte[]>, S
 
     @Override
     public List<byte[]> convertToEntityAttribute(String dbData) {
-        if(dbData.isEmpty()) {
+        if(Objects.isNull(dbData)) {
             return Collections.emptyList();
         }
 
