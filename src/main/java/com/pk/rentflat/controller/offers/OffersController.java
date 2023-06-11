@@ -1,5 +1,6 @@
 package com.pk.rentflat.controller.offers;
 
+import com.pk.rentflat.controller.dto.offers.OffersFilter;
 import com.pk.rentflat.controller.dto.offers.OffersRequest;
 import com.pk.rentflat.controller.dto.offers.OffersResponse;
 import com.pk.rentflat.converter.offers.OffersConverter;
@@ -7,7 +8,12 @@ import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.service.building.BuildingService;
 import com.pk.rentflat.service.offers.OffersService;
 import com.pk.rentflat.service.reviews.ReviewsService;
+import com.pk.rentflat.utils.PageDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +22,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -38,6 +46,51 @@ public class OffersController {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffers());
     }
 
+    @GetMapping("/filter")
+    public PageDto<OffersResponse> getAllOffersFilter(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String streetAddress,
+            @RequestParam(required = false) String postalCode,
+            @RequestParam(required = false) Float priceFrom,
+            @RequestParam(required = false) Float priceTo,
+            @RequestParam(required = false) Integer areaFrom,
+            @RequestParam(required = false) Integer areaTo,
+            @RequestParam(required = false) Integer roomCountFrom,
+            @RequestParam(required = false) Integer roomCountTo,
+            @RequestParam(required = false) String marketType,
+            @RequestParam(required = false) String district,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            @RequestParam(required = false) LocalDateTime availableFrom,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            @RequestParam(required = false) LocalDateTime availableUntil,
+            @RequestParam(required = false, defaultValue = "25") int pageSize,
+            @RequestParam(required = false, defaultValue = "0") int pageNumber
+    ) {
+        OffersFilter offersFilter = OffersFilter
+                .builder()
+                .city(city)
+                .streetAddress(streetAddress)
+                .postalCode(postalCode)
+                .priceFrom(priceFrom)
+                .priceTo(priceTo)
+                .areaFrom(areaFrom)
+                .areaTo(areaTo)
+                .roomCountFrom(roomCountFrom)
+                .roomCountTo(roomCountTo)
+                .marketType(marketType)
+                .district(district)
+                .availableFrom(availableFrom)
+                .availableUntil(availableUntil)
+                .pageable(PageRequest.of(pageNumber, pageSize))
+                .build();
+
+        Page<Offers> allOffers = offersService.getAllOffers(offersFilter);
+        List<OffersResponse> offersResponses =
+                OffersConverter.convertOffersListToOffersResponseList(allOffers.getContent());
+        return new PageDto<>(new PageImpl<>(offersResponses, allOffers.getPageable(),
+                allOffers.getTotalElements()));
+    }
+
     @GetMapping("/{id}")
     public OffersResponse getOfferById(@PathVariable Integer id) {
         Offers offer = offersService.getOfferById(id);
@@ -56,21 +109,13 @@ public class OffersController {
     @PostMapping
     public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest) {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
-        return OffersConverter.convertOffersToOffersResponseWithReviewsAndBuilding(
-                offer,
-                reviewsService.getOfferReviews(offer.getId()),
-                buildingService.getBuilding(offer.getBuildingDetails())
-        );
+        return OffersConverter.convertOffersRequestToOffers(offer);
     }
 
     @PutMapping
     public OffersResponse updateOffer(@RequestBody OffersRequest offersRequest) {
         Offers offer = offersService.updateOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
-        return OffersConverter.convertOffersToOffersResponseWithReviewsAndBuilding(
-                offer,
-                reviewsService.getOfferReviews(offer.getId()),
-                buildingService.getBuilding(offer.getBuildingDetails())
-        );
+        return OffersConverter.convertOffersRequestToOffers(offer);
     }
 
     @DeleteMapping("/{id}")

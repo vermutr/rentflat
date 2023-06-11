@@ -1,11 +1,14 @@
 package com.pk.rentflat.service.offers.impl;
 
 import com.pk.rentflat.config.security.util.SecurityUtil;
+import com.pk.rentflat.controller.dto.offers.OffersFilter;
 import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.repository.OffersRepository;
+import com.pk.rentflat.repository.specification.OffersSpecification;
 import com.pk.rentflat.service.customerdetails.CustomerDetailsService;
 import com.pk.rentflat.service.offers.OffersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +24,12 @@ public class OffersServiceImpl implements OffersService {
     @Override
     public List<Offers> getAllOffers() {
         return offersRepository.findAll();
+    }
+
+    @Override
+    public Page<Offers> getAllOffers(OffersFilter offersFilter) {
+        OffersSpecification offersSpecification = new OffersSpecification(offersFilter);
+        return offersRepository.findAll(offersSpecification, offersFilter.getPageable());
     }
 
     @Override
