@@ -106,7 +106,7 @@ public class OffersController {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest) {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
         return OffersConverter.convertOffersRequestToOffers(offer);
