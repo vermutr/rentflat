@@ -11,6 +11,7 @@ import com.pk.rentflat.model.Reviews;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class OffersConverter {
 
@@ -58,14 +59,21 @@ public class OffersConverter {
         offers.setAvailableUntil(offersRequest.getAvailableUntil());
 
         try {
-            offers.setMainPicture(offersRequest.getMainPicture().getBytes());
-            offers.setAllPictures(offersRequest.getAllPictures().stream().map(s-> {
-                try {
-                    return s.getBytes();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }).toList());
+            if (Objects.nonNull(offersRequest.getMainPicture())) {
+                offers.setMainPicture(offersRequest.getMainPicture().getBytes());
+            }
+            if (Objects.nonNull(offersRequest.getAllPictures())) {
+                offers.setAllPictures(offersRequest.getAllPictures()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(s -> {
+                            try {
+                                return s.getBytes();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }).toList());
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

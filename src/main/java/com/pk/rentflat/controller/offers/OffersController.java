@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -107,7 +106,7 @@ public class OffersController {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest) {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
         return OffersConverter.convertOffersRequestToOffers(offer);
