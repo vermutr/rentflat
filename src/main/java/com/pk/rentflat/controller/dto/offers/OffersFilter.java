@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -36,9 +36,9 @@ public class OffersFilter {
 
     private String district;
 
-    private LocalDateTime availableFrom;
+    private LocalDate availableFrom;
 
-    private LocalDateTime availableUntil;
+    private LocalDate availableUntil;
 
     private Pageable pageable;
 

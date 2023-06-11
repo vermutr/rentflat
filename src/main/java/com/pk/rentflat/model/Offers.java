@@ -18,6 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -79,10 +80,10 @@ public class Offers {
     private Integer buildingDetails;
 
     @Column(name = "available_from")
-    private LocalDateTime availableFrom;
+    private LocalDate availableFrom;
 
     @Column(name = "available_until")
-    private LocalDateTime availableUntil;
+    private LocalDate availableUntil;
 
     @Override
     public boolean equals(Object o) {

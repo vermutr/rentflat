@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,10 +60,10 @@ public class OffersController {
             @RequestParam(required = false) Integer roomCountTo,
             @RequestParam(required = false) String marketType,
             @RequestParam(required = false) String district,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-            @RequestParam(required = false) LocalDateTime availableFrom,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-            @RequestParam(required = false) LocalDateTime availableUntil,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(required = false) LocalDate availableFrom,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(required = false) LocalDate availableUntil,
             @RequestParam(required = false, defaultValue = "25") int pageSize,
             @RequestParam(required = false, defaultValue = "0") int pageNumber
     ) {

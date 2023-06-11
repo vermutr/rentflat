@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -50,8 +50,8 @@ public class OffersResponse {
 
     private Integer buildingDetails;
 
-    private LocalDateTime availableFrom;
+    private LocalDate availableFrom;
 
-    private LocalDateTime availableUntil;
+    private LocalDate availableUntil;
 
 }
