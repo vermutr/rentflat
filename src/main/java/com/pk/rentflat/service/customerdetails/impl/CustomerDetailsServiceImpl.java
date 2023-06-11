@@ -17,4 +17,9 @@ public class CustomerDetailsServiceImpl implements CustomerDetailsService {
         return customerDetailsRepository.save(customerDetails);
     }
 
+    @Override
+    public CustomerDetails getCustomerDetails(Integer id) {
+        return customerDetailsRepository.getReferenceById(id);
+    }
+
 }

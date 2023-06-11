@@ -1,5 +1,6 @@
 package com.pk.rentflat.controller.offers;
 
+import com.pk.rentflat.controller.dto.offers.OffersRequest;
 import com.pk.rentflat.controller.dto.offers.OffersResponse;
 import com.pk.rentflat.converter.offers.OffersConverter;
 import com.pk.rentflat.model.Offers;
@@ -8,8 +9,12 @@ import com.pk.rentflat.service.offers.OffersService;
 import com.pk.rentflat.service.reviews.ReviewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,5 +52,31 @@ public class OffersController {
     public List<OffersResponse> getOfferByCustomerId() {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
     }
+
+    @PostMapping
+    public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest) {
+        Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
+        return OffersConverter.convertOffersToOffersResponseWithReviewsAndBuilding(
+                offer,
+                reviewsService.getOfferReviews(offer.getId()),
+                buildingService.getBuilding(offer.getBuildingDetails())
+        );
+    }
+
+    @PutMapping
+    public OffersResponse updateOffer(@RequestBody OffersRequest offersRequest) {
+        Offers offer = offersService.updateOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
+        return OffersConverter.convertOffersToOffersResponseWithReviewsAndBuilding(
+                offer,
+                reviewsService.getOfferReviews(offer.getId()),
+                buildingService.getBuilding(offer.getBuildingDetails())
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOffer(@PathVariable Integer id) {
+        offersService.deleteOffer(id);
+    }
+
 
 }

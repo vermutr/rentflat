@@ -12,4 +12,10 @@ public interface OffersService {
 
     List<Offers> getAllOffersByCustomerId();
 
+    Offers saveOffer(Offers offer);
+
+    Offers updateOffer(Offers offer);
+
+    void deleteOffer(Integer id);
+
 }

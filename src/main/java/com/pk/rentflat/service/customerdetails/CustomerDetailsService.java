@@ -6,4 +6,6 @@ public interface CustomerDetailsService {
 
     CustomerDetails saveCustomerDetails(CustomerDetails customerDetails);
 
+    CustomerDetails getCustomerDetails(Integer id);
+
 }

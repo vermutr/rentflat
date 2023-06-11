@@ -1,7 +1,6 @@
 package com.pk.rentflat.model;
 
 import com.pk.rentflat.converter.attributeconverter.ListToStringConverter;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -66,13 +65,13 @@ public class Offers {
     private String district;
 
     @Column(name = "main_picture")
-    private String mainPicture;
+    private byte[] mainPicture;
 
     @Convert(converter = ListToStringConverter.class)
     @Column(name = "all_pictures")
-    private List<String> allPictures;
+    private List<byte[]> allPictures;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private CustomerDetails customerDetails;
 

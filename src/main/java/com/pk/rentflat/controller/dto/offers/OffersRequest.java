@@ -1,24 +1,21 @@
 package com.pk.rentflat.controller.dto.offers;
 
-import com.pk.rentflat.controller.dto.building.BuildingResponse;
-import com.pk.rentflat.controller.dto.customers.CustomerDetailsResponse;
-import com.pk.rentflat.controller.dto.reviews.ReviewsResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OffersResponse {
+public class OffersRequest {
 
-    private Integer id;
+    private String id;
 
     private String city;
 
@@ -38,15 +35,9 @@ public class OffersResponse {
 
     private String district;
 
-    private byte[] mainPicture;
+    private MultipartFile mainPicture;
 
-    private List<byte[]> allPictures;
-
-    private BuildingResponse buildingResponse;
-
-    private List<ReviewsResponse> reviewsResponse;
-
-    private CustomerDetailsResponse owner;
+    private List<MultipartFile> allPictures;
 
     private Integer buildingDetails;
 

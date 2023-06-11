@@ -1,5 +1,6 @@
 package com.pk.rentflat.converter.offers;
 
+import com.pk.rentflat.controller.dto.offers.OffersRequest;
 import com.pk.rentflat.controller.dto.offers.OffersResponse;
 import com.pk.rentflat.converter.building.BuildingConverter;
 import com.pk.rentflat.converter.customerdetails.CustomerDetailsConverter;
@@ -8,6 +9,7 @@ import com.pk.rentflat.model.Building;
 import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.model.Reviews;
 
+import java.io.IOException;
 import java.util.List;
 
 public class OffersConverter {
@@ -16,7 +18,7 @@ public class OffersConverter {
 
     }
 
-    public static OffersResponse convertOffersToOffersResponse(Offers offers) {
+    public static OffersResponse convertOffersRequestToOffers(Offers offers) {
         OffersResponse offersResponse = new OffersResponse();
         offersResponse.setId(offers.getId());
         offersResponse.setCity(offers.getCity());
@@ -40,12 +42,43 @@ public class OffersConverter {
         return offersResponse;
     }
 
+    public static Offers convertOffersRequestToOffers(OffersRequest offersRequest) {
+        Offers offers = new Offers();
+        offers.setCity(offersRequest.getCity());
+        offers.setStreetAddress(offersRequest.getStreetAddress());
+        offers.setPostalCode(offersRequest.getPostalCode());
+        offers.setPrice(offersRequest.getPrice());
+        offers.setArea(offersRequest.getArea());
+        offers.setRoomCount(offersRequest.getRoomCount());
+        offers.setMarketType(offersRequest.getMarketType());
+        offers.setDescription(offersRequest.getDescription());
+        offers.setDistrict(offersRequest.getDistrict());
+        offers.setBuildingDetails(offersRequest.getBuildingDetails());
+        offers.setAvailableFrom(offersRequest.getAvailableFrom());
+        offers.setAvailableUntil(offersRequest.getAvailableUntil());
+
+        try {
+            offers.setMainPicture(offersRequest.getMainPicture().getBytes());
+            offers.setAllPictures(offersRequest.getAllPictures().stream().map(s-> {
+                try {
+                    return s.getBytes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).toList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return offers;
+    }
+
     public static OffersResponse convertOffersToOffersResponseWithReviewsAndBuilding(
             Offers offers,
             List<Reviews> reviews,
             Building building
     ) {
-        OffersResponse offersResponse = convertOffersToOffersResponse(offers);
+        OffersResponse offersResponse = convertOffersRequestToOffers(offers);
         offersResponse.setReviewsResponse(ReviewsConverter.convertReviewsListToReviewsResponseList(reviews));
         offersResponse.setBuildingResponse(BuildingConverter.convertBuildingToBuildingResponse(building));
         return offersResponse;
@@ -53,7 +86,7 @@ public class OffersConverter {
 
     public static List<OffersResponse> convertOffersListToOffersResponseList(List<Offers> offersList) {
         return offersList.stream()
-                .map(OffersConverter::convertOffersToOffersResponse)
+                .map(OffersConverter::convertOffersRequestToOffers)
                 .toList();
     }
 
