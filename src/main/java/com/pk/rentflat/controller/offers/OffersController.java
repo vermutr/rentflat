@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -106,7 +107,7 @@ public class OffersController {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest) {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest));
         return OffersConverter.convertOffersRequestToOffers(offer);
