@@ -40,8 +40,6 @@ public class OffersResponse {
 
     private byte[] mainPicture;
 
-    private List<byte[]> allPictures;
-
     private BuildingResponse buildingResponse;
 
     private List<ReviewsResponse> reviewsResponse;

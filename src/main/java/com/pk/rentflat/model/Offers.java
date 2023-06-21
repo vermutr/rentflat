@@ -1,13 +1,12 @@
 package com.pk.rentflat.model;
 
-import com.pk.rentflat.converter.attributeconverter.ListToStringConverter;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,8 +18,6 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -65,12 +62,9 @@ public class Offers {
     @Column(name = "district")
     private String district;
 
+    @Lob
     @Column(name = "main_picture")
     private byte[] mainPicture;
-
-    @Convert(converter = ListToStringConverter.class)
-    @Column(name = "all_pictures")
-    private List<byte[]> allPictures;
 
     @OneToOne
     @JoinColumn(name = "owner", referencedColumnName = "id")

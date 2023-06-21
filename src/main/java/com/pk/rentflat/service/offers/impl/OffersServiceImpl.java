@@ -74,7 +74,6 @@ public class OffersServiceImpl implements OffersService {
         oldOffer.setDescription(newOffer.getDescription());
         oldOffer.setDistrict(newOffer.getDistrict());
         oldOffer.setMainPicture(newOffer.getMainPicture());
-        oldOffer.setAllPictures(newOffer.getAllPictures());
         oldOffer.setBuildingDetails(newOffer.getBuildingDetails());
         oldOffer.setAvailableUntil(newOffer.getAvailableUntil());
         oldOffer.setAvailableFrom(newOffer.getAvailableFrom());

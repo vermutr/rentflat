@@ -8,6 +8,8 @@ import com.pk.rentflat.converter.reviews.ReviewsConverter;
 import com.pk.rentflat.model.Building;
 import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.model.Reviews;
+import com.pk.rentflat.utils.ImageUtil;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,8 +36,9 @@ public class OffersConverter {
         offersResponse.setBuildingDetails(offers.getBuildingDetails());
         offersResponse.setAvailableFrom(offers.getAvailableFrom());
         offersResponse.setAvailableUntil(offers.getAvailableUntil());
-        offersResponse.setMainPicture(offers.getMainPicture());
-        offersResponse.setAllPictures(offers.getAllPictures());
+        if (offers.getMainPicture() != null) {
+            offersResponse.setMainPicture(ImageUtil.decompressImage(offers.getMainPicture()));
+        }
         offersResponse.setOwner(
                 CustomerDetailsConverter.convertCustomerDetailsToCustomerDetailsResponse(offers.getCustomerDetails())
         );
@@ -43,7 +46,7 @@ public class OffersConverter {
         return offersResponse;
     }
 
-    public static Offers convertOffersRequestToOffers(OffersRequest offersRequest) {
+    public static Offers convertOffersRequestToOffers(OffersRequest offersRequest, MultipartFile multipartFile) throws IOException {
         Offers offers = new Offers();
         offers.setCity(offersRequest.getCity());
         offers.setStreetAddress(offersRequest.getStreetAddress());
@@ -57,25 +60,8 @@ public class OffersConverter {
         offers.setBuildingDetails(offersRequest.getBuildingDetails());
         offers.setAvailableFrom(offersRequest.getAvailableFrom());
         offers.setAvailableUntil(offersRequest.getAvailableUntil());
-
-        try {
-            if (Objects.nonNull(offersRequest.getMainPicture())) {
-                offers.setMainPicture(offersRequest.getMainPicture().getBytes());
-            }
-            if (Objects.nonNull(offersRequest.getAllPictures())) {
-                offers.setAllPictures(offersRequest.getAllPictures()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .map(s -> {
-                            try {
-                                return s.getBytes();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }).toList());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (multipartFile != null) {
+            offers.setMainPicture(ImageUtil.compressImage(multipartFile.getBytes()));
         }
 
         return offers;

@@ -35,10 +35,6 @@ public class OffersRequest {
 
     private String district;
 
-    private MultipartFile mainPicture;
-
-    private List<MultipartFile> allPictures;
-
     private Integer buildingDetails;
 
     private LocalDate availableFrom;
