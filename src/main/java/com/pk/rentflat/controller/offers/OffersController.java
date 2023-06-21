@@ -111,7 +111,7 @@ public class OffersController {
         return OffersConverter.convertOffersListToOffersResponseList(offersService.getAllOffersByCustomerId());
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public OffersResponse saveOffer(@RequestPart("offer") OffersRequest offersRequest, @RequestPart("image") MultipartFile multipartFile) throws IOException {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest, multipartFile));
         return OffersConverter.convertOffersRequestToOffers(offer);
