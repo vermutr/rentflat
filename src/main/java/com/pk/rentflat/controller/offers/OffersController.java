@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -111,7 +112,7 @@ public class OffersController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public OffersResponse saveOffer(@RequestBody OffersRequest offersRequest, @RequestParam(required = false, value = "image") MultipartFile multipartFile) throws IOException {
+    public OffersResponse saveOffer(@RequestPart("offer") OffersRequest offersRequest, @RequestPart("image") MultipartFile multipartFile) throws IOException {
         Offers offer = offersService.saveOffer(OffersConverter.convertOffersRequestToOffers(offersRequest, multipartFile));
         return OffersConverter.convertOffersRequestToOffers(offer);
     }
