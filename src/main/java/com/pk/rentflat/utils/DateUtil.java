@@ -12,16 +12,16 @@ import java.time.ZoneId;
 @UtilityClass
 public class DateUtil {
 
-    public static final String PATTERN_MMddyyyy_slash = "MM/dd/yyyy";
+    public static final String PATTERN_yyyyMMdd = "yyyy-MM-dd";
 
-    public static final DateFormat DF_MMddyyyy_slash = new SimpleDateFormat(PATTERN_MMddyyyy_slash);
+    public static final DateFormat DF_yyyyMMdd = new SimpleDateFormat(PATTERN_yyyyMMdd);
 
-    public static LocalDate toMMddyyyySlashString(String dateString) {
+    public static LocalDate toyyyyMMddString(String dateString) {
         if (StringUtils.isEmpty(dateString)) {
             return null;
         }
         try {
-            return DF_MMddyyyy_slash
+            return DF_yyyyMMdd
                     .parse(dateString).toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();

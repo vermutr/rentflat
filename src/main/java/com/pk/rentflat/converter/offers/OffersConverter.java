@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class OffersConverter {
 
@@ -59,8 +58,8 @@ public class OffersConverter {
         offers.setDescription(offersRequest.getDescription());
         offers.setDistrict(offersRequest.getDistrict());
         offers.setBuildingDetails(offersRequest.getBuildingDetails());
-        offers.setAvailableFrom(DateUtil.toMMddyyyySlashString(offersRequest.getAvailableFrom()));
-        offers.setAvailableUntil(DateUtil.toMMddyyyySlashString(offersRequest.getAvailableUntil()));
+        offers.setAvailableFrom(DateUtil.toyyyyMMddString(offersRequest.getAvailableFrom()));
+        offers.setAvailableUntil(DateUtil.toyyyyMMddString(offersRequest.getAvailableUntil()));
         if (multipartFile != null) {
             offers.setMainPicture(ImageUtil.compressImage(multipartFile.getBytes()));
         }
