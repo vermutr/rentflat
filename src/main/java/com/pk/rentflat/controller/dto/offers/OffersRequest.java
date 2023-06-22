@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OffersRequest {
 
-    private String id;
+    private Integer id;
 
     private String city;
 

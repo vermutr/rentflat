@@ -10,6 +10,7 @@ import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.model.Reviews;
 import com.pk.rentflat.utils.DateUtil;
 import com.pk.rentflat.utils.ImageUtil;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class OffersConverter {
 
     public static Offers convertOffersRequestToOffers(OffersRequest offersRequest, MultipartFile multipartFile) throws IOException {
         Offers offers = new Offers();
+        offers.setId(offersRequest.getId());
         offers.setCity(offersRequest.getCity());
         offers.setStreetAddress(offersRequest.getStreetAddress());
         offers.setPostalCode(offersRequest.getPostalCode());
