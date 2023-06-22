@@ -37,7 +37,7 @@ public class OffersConverter {
         offersResponse.setAvailableFrom(offers.getAvailableFrom());
         offersResponse.setAvailableUntil(offers.getAvailableUntil());
         if (offers.getMainPicture() != null) {
-            offersResponse.setMainPicture(ImageUtil.decompressImage(offers.getMainPicture()));
+            offersResponse.setMainPicture(offers.getMainPicture());
         }
         offersResponse.setOwner(
                 CustomerDetailsConverter.convertCustomerDetailsToCustomerDetailsResponse(offers.getCustomerDetails())
@@ -61,7 +61,7 @@ public class OffersConverter {
         offers.setAvailableFrom(DateUtil.toyyyyMMddString(offersRequest.getAvailableFrom()));
         offers.setAvailableUntil(DateUtil.toyyyyMMddString(offersRequest.getAvailableUntil()));
         if (multipartFile != null) {
-            offers.setMainPicture(ImageUtil.compressImage(multipartFile.getBytes()));
+            offers.setMainPicture(multipartFile.getBytes());
         }
 
         return offers;
