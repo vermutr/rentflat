@@ -26,8 +26,7 @@
             <column name="available_until" type="Date"/>
             <column name="district" type="VARCHAR(30)"/>
             <column name="building_details" type="integer"/>
-            <column name="main_picture" type="VARCHAR2(100)"/>
-            <column name="all_pictures" type="VARCHAR2(4000)"/>
+            <column name="main_picture" type="BYTEA"/>
             <column name="owner" type="integer">
                 <constraints foreignKeyName="FK_customersDetails_offers" references="customers_details(id)" nullable="false"/>
             </column>

@@ -62,7 +62,6 @@ public class Offers {
     @Column(name = "district")
     private String district;
 
-    @Lob
     @Column(name = "main_picture")
     private byte[] mainPicture;
 

@@ -37,8 +37,8 @@ public class OffersRequest {
 
     private Integer buildingDetails;
 
-    private LocalDate availableFrom;
+    private String availableFrom;
 
-    private LocalDate availableUntil;
+    private String availableUntil;
 
 }

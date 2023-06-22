@@ -8,6 +8,7 @@ import com.pk.rentflat.converter.reviews.ReviewsConverter;
 import com.pk.rentflat.model.Building;
 import com.pk.rentflat.model.Offers;
 import com.pk.rentflat.model.Reviews;
+import com.pk.rentflat.utils.DateUtil;
 import com.pk.rentflat.utils.ImageUtil;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,8 +59,8 @@ public class OffersConverter {
         offers.setDescription(offersRequest.getDescription());
         offers.setDistrict(offersRequest.getDistrict());
         offers.setBuildingDetails(offersRequest.getBuildingDetails());
-        offers.setAvailableFrom(offersRequest.getAvailableFrom());
-        offers.setAvailableUntil(offersRequest.getAvailableUntil());
+        offers.setAvailableFrom(DateUtil.toMMddyyyySlashString(offersRequest.getAvailableFrom()));
+        offers.setAvailableUntil(DateUtil.toMMddyyyySlashString(offersRequest.getAvailableUntil()));
         if (multipartFile != null) {
             offers.setMainPicture(ImageUtil.compressImage(multipartFile.getBytes()));
         }
