@@ -117,7 +117,7 @@ public class OffersController {
         return OffersConverter.convertOffersRequestToOffers(offer);
     }
 
-    @PutMapping
+    @PutMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public OffersResponse updateOffer(@RequestBody OffersRequest offersRequest, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Offers offer = offersService.updateOffer(OffersConverter.convertOffersRequestToOffers(offersRequest, multipartFile));
         return OffersConverter.convertOffersRequestToOffers(offer);
